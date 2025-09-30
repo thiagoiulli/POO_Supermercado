@@ -3,8 +3,8 @@ package principal.supernosso;
 import java.util.Scanner;
 
 public class Caixa {
+    private static Estoque estoque = new Estoque();
     public static void main(String[] args) {
-        Estoque estoque = new Estoque();
         Produto p1 = new Produto(11111, "Detergente ABC", 1.00, 500);
         Produto p2 = new Produto(22222, "Sabao em po OMO", 6.50, 500);
         Produto p3 = new Produto(33333, "Shampoo beleza facial", 12.00, 500);
@@ -44,9 +44,16 @@ public class Caixa {
                         else{
                             System.out.println("Digite o numero de unidades:");
                             quantidades = input.nextInt();
-                            Produto p = estoque.consultarProduto(cdg);
-                            p.setQuantidade(quantidades);
-                            carrinho.addItemProduto(p);
+                            Produto pp = estoque.consultarProduto(cdg);
+                            Produto p = new Produto(pp.getCodigo(), pp.getDescricao(), pp.getPreco(), pp.getQuantidade());
+                            if (p.getQuantidade() < quantidades){
+                                System.out.println("Erro: somente " + p.getQuantidade() + " unidades no estoque");
+                            }
+                            else{
+                                p.setQuantidade(quantidades);
+                                carrinho.addItemProduto(p);
+                                estoque.removerProduto(p);
+                            }
                         }
                     }
                 }

@@ -52,7 +52,7 @@ public class Carrinho {
     public String listarProdutos(){
         String retorno = "";
         for (Produto e : produtos){
-            retorno = retorno + e.getDescricao() + "   R$" + e.getPreco() + "   *" + e.getQuantidade() + "\n";
+            retorno = retorno + e.getDescricao() + "_____R$" + e.getPreco() + " * " + e.getQuantidade() + " ----- R$" + e.getQuantidade()*e.getPreco() + "\n";
         }
         return retorno;
     }
